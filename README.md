@@ -1,7 +1,8 @@
 # todolist
 
 -  I tried using ejs to create a website using template.
-- we created a [view]view folder in order to use the ejs commands and created an ejs file `list.ejs` for all our ejs codes.
+- we created a `view` folder in order to use the ejs commands and created an ejs file `list.ejs` for all our ejs codes.
+- `app.js` is the main working file.
 
  > we do intialize the npm and then install the packages.
 
