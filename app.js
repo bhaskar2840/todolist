@@ -3,6 +3,8 @@
 const express=require("express");
 
 const app=express();
+app.use(express.static("public"));
+app.use(express.urlencoded({extended:true}))
 
 var items = []; // global variable
 
@@ -17,7 +19,7 @@ app.get("/" ,function(req,res){
     var options ={weekday : "long",
 day:"numeric", month:"long"};
 
-var day = today.toLocaleDateString("en-US",options);
+let day = today.toLocaleDateString("en-US",options);
 
 res.render("list", {daytoday:day,newListItems:items}); // we can only render once as list will not consider multiple
 // that is why we created an array of items in post and then we will loop through it and will add each  item at once  
@@ -27,14 +29,14 @@ res.render("list", {daytoday:day,newListItems:items}); // we can only render onc
 });
 
 app.post("/",function(req,res){
-    let item = req.body.newItems;
+    let item = req.body.newitems;
 
     items.push(item);
 
     res.redirect("/") // redirect the post request to the root/home route.
 })
 app.listen(3000,function(res,req){
-    console.log("server is up and running")
+    console.log("server is up and running at port 3000")
 })
 
 
