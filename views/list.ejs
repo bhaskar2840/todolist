@@ -1,14 +1,9 @@
-    <html>  
-    <head>
-        <link rel="stylesheet" href="css\style.css">
-
-        <title> todolist </title>
-    </head>
-
-    <body>
-          
+  
+ <%-include("header") -%>
+ 
+ 
         <div class="box" id="heading">
-        <h1><%=daytoday%></h1></div>
+        <h1><%=listItem%></h1></div>
 
         <div class="box">
             <% for(var i=0;i < newListItems.length;i++){ %> 
@@ -27,24 +22,12 @@
 
         <form  class="item" action="/" method="POST">
         <input type="text" name="newitems" placeholder="New Item" autocomplete="off">
-        <button type="submit" name="button">+</button></form>
+        <button type="submit" name="button" value=<%=listItem %> add </button></form>
         </div>
 
 
-    </body>
 
-    </html>
 
-<!-- 
-    <% if (daytoday==="saturday"|| daytoday==="sunday"){ %>
-        <h1 style="color: aqua;"> <%= daytoday %>! todolist </h1>
 
-    <%} else{ %>
-        <h1 style="color: brown;"><%= daytoday %>! todolist</h1>
-    
-    <% } %>
 
-    all this is <% %> is include javascript in ejs and is only for flow statements like for
-    loop and while loop and if else statement and should be in each line . -->
-
-     <!-- this is represantation of ejs template use. <%= %>    -->
+     <%-include("footer") -%>
