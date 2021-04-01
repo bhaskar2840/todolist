@@ -7,6 +7,7 @@ app.use(express.static("public"));
 app.use(express.urlencoded({extended:true}))
 
 var items = []; // global variable
+var workItems =[];
 
 
 app.set("view engine","ejs"); // we have to make (views folder and the file inside should be of ejs
@@ -21,7 +22,7 @@ day:"numeric", month:"long"};
 
 let day = today.toLocaleDateString("en-US",options);
 
-res.render("list", {daytoday:day,newListItems:items}); // we can only render once as list will not consider multiple
+res.render("list", {listItem:day,newListItems:items}); // we can only render once as list will not consider multiple
 // that is why we created an array of items in post and then we will loop through it and will add each  item at once  
 
     
@@ -30,14 +31,44 @@ res.render("list", {daytoday:day,newListItems:items}); // we can only render onc
 
 app.post("/",function(req,res){
     let item = req.body.newitems;
+    console.log(req.body);
 
     items.push(item);
 
     res.redirect("/") // redirect the post request to the root/home route.
 })
+
+
 app.listen(3000,function(res,req){
     console.log("server is up and running at port 3000")
-})
+    
+});
+
+app.post("/work",function(req,res){
+    let item= req.body.newitems;
+    
+    
+    if (res.body.button === "Work"){
+        workItems.push(item);
+        res.redirect("/work")
+
+    }else{
+    items.push(item);
+    res.redirect("/about");}
+
+
+});
+
+app.get("/work", function (req,res){
+    
+    res.render("list", {listItem:"Work List" , newListItems:workItems})});
+
+app.get("/about", function(req,res){
+    res.render("about")}
+);
+
+
+
 
 
 
