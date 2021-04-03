@@ -1,10 +1,37 @@
 // jshint esversion:6
 
 const express=require("express");
+const mongoose = require("mongoose");
 
 const app=express();
 app.use(express.static("public"));
 app.use(express.urlencoded({extended:true}))
+
+mongoose.connect("mongodb://localhost:27017/todolistDB",{useNewUrlParser:true},{ useUnifiedTopology: true});
+
+const itemsSchema={
+    name:String
+};
+const Item = mongoose.model("Item",itemsSchema);
+
+const item1=new Item({
+    name:"welcome to your todolist"
+
+});
+const item2=new Item({
+    name:"Hit the + button to add a new item."
+});
+const item3= new Item({
+    name:"<--- hit this to delete."
+
+});
+
+const defaultItems = [item1,item2,item3];
+
+Item.insertMany(defaultItems,function(err){
+    if (err){console.log(err)}
+    else{console.log("successfully saved the default items to array.")}
+})
 
 var items = []; // global variable
 var workItems =[];
